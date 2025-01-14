@@ -1,37 +1,25 @@
-name: Flutter CI
+name: Build Flutter APK
 
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches:
-      - main
+      - master  # Change this to your main branch name if different
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Download Flutter SDK
-      run: |
-        wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.3.4-stable.tar.xz
-        tar xf flutter_linux_3.3.4-stable.tar.xz
-        echo "$PWD"
-        export PATH="$PATH:$PWD/flutter/bin"
-        echo $PATH
     
-    - name: Install dependencies
-      run: flutter pub get
-
-    - name: Build APK
-      run: flutter build apk --release
-
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
       with:
-        name: release-apk
-        path: build/app/outputs/flutter-apk/*.apk
+        flutter-version: '3.22.2'  # Change this to the Flutter version you are using
+    
+    - name: Get dependencies
+      run: flutter pub get
+    
+    - name: Build APK
+      run: flutter build apk
