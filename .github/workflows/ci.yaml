@@ -20,7 +20,9 @@ jobs:
       run: |
         wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.3.4-stable.tar.xz
         tar xf flutter_linux_3.3.4-stable.tar.xz
-        export PATH="$PATH:`pwd`/flutter/bin"
+        echo "$PWD"
+        export PATH="$PATH:$PWD/flutter/bin"
+        echo $PATH
     
     - name: Install dependencies
       run: flutter pub get
