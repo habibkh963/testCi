@@ -15,12 +15,13 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      
-    - name: Install Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: 'stable'
 
+    - name: Download Flutter SDK
+      run: |
+        wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.3.4-stable.tar.xz
+        tar xf flutter_linux_3.3.4-stable.tar.xz
+        export PATH="$PATH:`pwd`/flutter/bin"
+    
     - name: Install dependencies
       run: flutter pub get
 
