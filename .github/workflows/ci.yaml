@@ -54,5 +54,5 @@ jobs:
       run: |
         curl -X POST "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/sendDocument" 
         -F chat_id=$CHAT_ID 
-        -F document=@build/app/outputs/flutter-apk/app-release.apk 
+        -F document=./build/app/outputs/flutter-apk/app-release.apk 
         -F caption="New APK Build"
